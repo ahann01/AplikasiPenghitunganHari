@@ -1,12 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 
-/**
- *
- * @author User
- */
+import java.awt.Color;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.TextStyle;
+import java.util.Locale;
+import java.time.temporal.ChronoUnit;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.UIManager;
+import com.toedter.calendar.JCalendar;
+
 public class FrmPenghitunganHari extends javax.swing.JFrame {
 
     /**
@@ -14,6 +17,19 @@ public class FrmPenghitunganHari extends javax.swing.JFrame {
      */
     public FrmPenghitunganHari() {
         initComponents();
+        setLocationRelativeTo(null);
+        setAlwaysOnTop(true);
+        setTitle("Aplikasi Penghitungan Hari");
+
+        calTanggal1.setWeekOfYearVisible(false);
+        calTanggal2.setWeekOfYearVisible(false);
+
+        calTanggal1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
+        calTanggal2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 200, 200)));
+
+        calTanggal1.getDayChooser().getDayPanel().setBackground(Color.WHITE);
+        calTanggal2.getDayChooser().getDayPanel().setBackground(Color.WHITE);
+
     }
 
     /**
@@ -29,17 +45,36 @@ public class FrmPenghitunganHari extends javax.swing.JFrame {
         pnlHeader = new javax.swing.JPanel();
         lblJudul = new javax.swing.JLabel();
         pnlMain = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
+        lblBulan = new javax.swing.JLabel();
+        lblTahun = new javax.swing.JLabel();
+        cmbBulan = new javax.swing.JComboBox<>();
+        spnTahun = new javax.swing.JSpinner();
+        lblJumlahHari = new javax.swing.JLabel();
+        txtHasil = new javax.swing.JTextField();
+        btnHitung = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        btnKeluar = new javax.swing.JButton();
+        lblInfo = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         pnlOutput = new javax.swing.JPanel();
+        lblJudulVariasi = new javax.swing.JLabel();
+        lblTanggal1 = new javax.swing.JLabel();
+        lblTanggal2 = new javax.swing.JLabel();
+        calTanggal1 = new com.toedter.calendar.JCalendar();
+        calTanggal2 = new com.toedter.calendar.JCalendar();
+        btnSelisih = new javax.swing.JButton();
+        lblHasilSelisih = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(232, 240, 242));
         setSize(new java.awt.Dimension(600, 500));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         pnlHeader.setBackground(new java.awt.Color(0, 122, 204));
 
@@ -48,115 +83,349 @@ public class FrmPenghitunganHari extends javax.swing.JFrame {
         lblJudul.setText("APLIKASI PERHITUNGAN HARI");
         pnlHeader.add(lblJudul);
 
-        jLabel2.setText("jLabel2");
+        pnlMain.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setText("jLabel3");
+        lblBulan.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblBulan.setForeground(new java.awt.Color(0, 51, 102));
+        lblBulan.setText("Pilih Bulan :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lblTahun.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblTahun.setForeground(new java.awt.Color(0, 51, 102));
+        lblTahun.setText("Masukkan Tahun :");
 
-        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
-        pnlMain.setLayout(pnlMainLayout);
-        pnlMainLayout.setHorizontalGroup(
-            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlMainLayout.setVerticalGroup(
-            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlMainLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
+        cmbBulan.setForeground(new java.awt.Color(0, 51, 102));
+        cmbBulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblJumlahHari.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblJumlahHari.setForeground(new java.awt.Color(0, 51, 102));
+        lblJumlahHari.setText("Jumlah Hari :");
+
+        txtHasil.setEditable(false);
+        txtHasil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHasilActionPerformed(evt);
+            }
+        });
+
+        btnHitung.setBackground(new java.awt.Color(0, 163, 108));
+        btnHitung.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHitung.setForeground(new java.awt.Color(255, 255, 255));
+        btnHitung.setText("Hitung");
+        btnHitung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHitungActionPerformed(evt);
+            }
+        });
+
+        btnReset.setBackground(new java.awt.Color(91, 192, 222));
+        btnReset.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnReset.setForeground(new java.awt.Color(255, 255, 255));
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+
+        btnKeluar.setBackground(new java.awt.Color(217, 83, 79));
+        btnKeluar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnKeluar.setForeground(new java.awt.Color(255, 255, 255));
+        btnKeluar.setText("Keluar");
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
+
+        lblInfo.setBackground(new java.awt.Color(253, 245, 230));
+        lblInfo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblInfo.setText("Hari Pertama : Hari terakhir :                                       ");
+
+        jSeparator1.setForeground(new java.awt.Color(253, 245, 230));
+
+        pnlOutput.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblJudulVariasi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblJudulVariasi.setForeground(new java.awt.Color(0, 51, 102));
+        lblJudulVariasi.setText("Hitung Selisih Hari");
+        lblJudulVariasi.setAlignmentX(20.0F);
+        lblJudulVariasi.setAlignmentY(10.0F);
+        lblJudulVariasi.setPreferredSize(new java.awt.Dimension(250, 25));
+
+        lblTanggal1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblTanggal1.setForeground(new java.awt.Color(0, 51, 102));
+        lblTanggal1.setText("Tanggal 1 :");
+        lblTanggal1.setPreferredSize(new java.awt.Dimension(100, 25));
+
+        lblTanggal2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblTanggal2.setForeground(new java.awt.Color(0, 51, 102));
+        lblTanggal2.setText("Tanggal 2 :");
+        lblTanggal2.setPreferredSize(new java.awt.Dimension(100, 25));
+
+        calTanggal1.setBackground(new java.awt.Color(255, 255, 255));
+        calTanggal1.setPreferredSize(new java.awt.Dimension(280, 200));
+
+        calTanggal2.setBackground(new java.awt.Color(255, 255, 255));
+        calTanggal2.setPreferredSize(new java.awt.Dimension(280, 200));
+
+        btnSelisih.setBackground(new java.awt.Color(0, 122, 204));
+        btnSelisih.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSelisih.setForeground(new java.awt.Color(255, 255, 255));
+        btnSelisih.setText("Hitung Selisih Hari");
+        btnSelisih.setPreferredSize(new java.awt.Dimension(200, 35));
+        btnSelisih.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelisihActionPerformed(evt);
+            }
+        });
+
+        lblHasilSelisih.setForeground(new java.awt.Color(0, 100, 0));
+        lblHasilSelisih.setText("Hasil: ... hari");
 
         javax.swing.GroupLayout pnlOutputLayout = new javax.swing.GroupLayout(pnlOutput);
         pnlOutput.setLayout(pnlOutputLayout);
         pnlOutputLayout.setHorizontalGroup(
             pnlOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnlOutputLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pnlOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlOutputLayout.createSequentialGroup()
+                        .addGroup(pnlOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblJudulVariasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlOutputLayout.createSequentialGroup()
+                                .addGroup(pnlOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTanggal1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblTanggal2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(pnlOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(calTanggal1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(calTanggal2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(53, Short.MAX_VALUE))
+                    .addGroup(pnlOutputLayout.createSequentialGroup()
+                        .addComponent(btnSelisih, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblHasilSelisih)
+                        .addGap(155, 155, 155))))
         );
         pnlOutputLayout.setVerticalGroup(
             pnlOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 115, Short.MAX_VALUE)
+            .addGroup(pnlOutputLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblJudulVariasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlOutputLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(calTanggal1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlOutputLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(lblTanggal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(pnlOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlOutputLayout.createSequentialGroup()
+                        .addComponent(calTanggal2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOutputLayout.createSequentialGroup()
+                        .addComponent(lblTanggal2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)))
+                .addGroup(pnlOutputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSelisih, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHasilSelisih, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
+        pnlMain.setLayout(pnlMainLayout);
+        pnlMainLayout.setHorizontalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addComponent(lblInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlMainLayout.createSequentialGroup()
+                                .addComponent(lblJumlahHari, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtHasil, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlMainLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlMainLayout.createSequentialGroup()
+                                        .addComponent(btnHitung)
+                                        .addGap(121, 121, 121)
+                                        .addComponent(btnReset)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(pnlMainLayout.createSequentialGroup()
+                                        .addComponent(lblBulan)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cmbBulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblTahun)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(spnTahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnKeluar))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addComponent(pnlOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pnlMainLayout.setVerticalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlMainLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(spnTahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTahun)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbBulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBulan))))
+                .addGap(18, 18, 18)
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHitung)
+                    .addComponent(btnReset)
+                    .addComponent(btnKeluar))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblJumlahHari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtHasil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSelisihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelisihActionPerformed
+        // Ambil tanggal dari kedua JCalendar
+        LocalDate tgl1 = calTanggal1.getDate().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+        LocalDate tgl2 = calTanggal2.getDate().toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+
+        long selisih = ChronoUnit.DAYS.between(tgl1, tgl2);
+
+        // Tampilkan hasil
+        lblHasilSelisih.setText("Hasil: " + Math.abs(selisih) + " hari");
+    }//GEN-LAST:event_btnSelisihActionPerformed
+
+    private void btnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungActionPerformed
+        int tahun = (Integer) spnTahun.getValue();
+        int bulan = cmbBulan.getSelectedIndex() + 1;
+
+        YearMonth yearMonth = YearMonth.of(tahun, bulan);
+        int jumlahHari = yearMonth.lengthOfMonth();
+
+        LocalDate awal = LocalDate.of(tahun, bulan, 1);
+        LocalDate akhir = LocalDate.of(tahun, bulan, jumlahHari);
+
+        String hariAwal = awal.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("id", "ID"));
+        String hariAkhir = akhir.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("id", "ID"));
+
+        txtHasil.setText(jumlahHari + " Hari");
+        lblInfo.setText("Hari pertama: " + hariAwal + ", Hari terakhir: " + hariAkhir);
+    }//GEN-LAST:event_btnHitungActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        spnTahun.setValue(2025);
+        cmbBulan.setSelectedIndex(0);
+        txtHasil.setText("");
+        lblInfo.setText("");
+        
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin keluar?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnKeluarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        String[] bulan = {"Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
+        cmbBulan.setModel(new javax.swing.DefaultComboBoxModel<>(bulan));
+        spnTahun.setModel(new javax.swing.SpinnerNumberModel(2025, 1900, 3000, 1));
+        JSpinner.NumberEditor editor = new JSpinner.NumberEditor(spnTahun, "#");
+        spnTahun.setEditor(editor);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void txtHasilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHasilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHasilActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+        
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
                 }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPenghitunganHari.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPenghitunganHari.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPenghitunganHari.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPenghitunganHari.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmPenghitunganHari().setVisible(true);
-            }
-        });
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new FrmPenghitunganHari().setVisible(true);
+                }
+            });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnHitung;
+    private javax.swing.JButton btnKeluar;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnSelisih;
+    private com.toedter.calendar.JCalendar calTanggal1;
+    private com.toedter.calendar.JCalendar calTanggal2;
+    private javax.swing.JComboBox<String> cmbBulan;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblBulan;
+    private javax.swing.JLabel lblHasilSelisih;
+    private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblJudul;
+    private javax.swing.JLabel lblJudulVariasi;
+    private javax.swing.JLabel lblJumlahHari;
+    private javax.swing.JLabel lblTahun;
+    private javax.swing.JLabel lblTanggal1;
+    private javax.swing.JLabel lblTanggal2;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlOutput;
+    private javax.swing.JSpinner spnTahun;
+    private javax.swing.JTextField txtHasil;
     // End of variables declaration//GEN-END:variables
 }
